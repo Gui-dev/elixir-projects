@@ -39,7 +39,10 @@ defmodule Fatura do
     File.write!(nome_arquivo, binary)
   end
 
-
+  def load(nome_arquivo) do
+    { status, file } = File.read(nome_arquivo)
+    :erlang.binary_to_term(file)
+  end
 
   @doc """
     Ao receber `fatura` retorna um array de faturas ordenado
