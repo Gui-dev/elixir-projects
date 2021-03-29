@@ -15,9 +15,31 @@ defmodule Fatura do
     end
   end
 
+  @doc """
+    Ao receber `faturas` e `quantidades` retorna a quantidade de fatura á ser pagas
+      ## Exemplos
+      iex> Fatura.faturas_a_pagar(Fatura.criar_faturas(['Telefone', 'Agua'], [5, 10]), 1)
+      {
+        [
+          'Fatura: Telefone vence no dia: 5'
+        ],
+        [
+          'Fatura: Agua vence no dia: 5',
+          'Fatura: Telefone vence no dia: 10',
+          'Fatura: Agua vence no dia: 10'
+        ]
+      }
+  """
   def faturas_a_pagar(faturas, quantidades) do
     Enum.split(faturas, quantidades)
   end
+
+  def save(nome_arquivo, faturas) do
+    binary = :erlang.term_to_binary(faturas)
+    File.write!(nome_arquivo, binary)
+  end
+
+
 
   @doc """
     Ao receber `fatura` retorna um array de faturas ordenado
