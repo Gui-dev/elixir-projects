@@ -40,13 +40,19 @@ defmodule Fatura do
   end
 
   def load(nome_arquivo) do
-    { _status, file } = File.read(nome_arquivo)
+    { status, file } = File.read(nome_arquivo)
 
     case status do
       :ok -> :erlang.binary_to_term file
       :error -> "Não foi possível carregar o arquivo"
     end
 
+  end
+
+  def pagar_uma_fatura(faturas, vencimento, quantidade) do
+    criar_faturas(faturas, vencimento)
+    |> ordena_fatura
+    |> faturas_a_pagar(quantidade)
   end
 
   @doc """
