@@ -11,7 +11,7 @@ defmodule Fatura do
   """
   def criar_faturas(faturas, vencimentos) do
     for vencimento <- vencimentos, fatura <- faturas do
-      'Fatura: #{fatura} vence no dia: #{vencimento}'
+      %Fatura.Conta{fatura: fatura, vencimento: vencimento}
     end
   end
 
