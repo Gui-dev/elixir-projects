@@ -10,6 +10,23 @@ defmodule IconeIdentidade do
     |> criar_tabela
     |> remover_impar
     |> constroi_pixel
+    |> desenhar
+    |> salvar(input)
+  end
+
+  def salvar(imagem, input) do
+    File.write('#{input}.png', imagem)
+  end
+
+  def desenhar(%IconeIdentidade.Imagem{ color: color, pixel_map: pixel_map }) do
+    imagem = :egd.create(250, 250)
+    preencha = :egd.color(color)
+
+    Enum.each pixel_map, fn{ start, stop } ->
+      :egd.filledRectangle(imagem, start, stop, preencha)
+    end
+
+    :egd.render(imagem)
   end
 
   def criar_cor(imagem) do
