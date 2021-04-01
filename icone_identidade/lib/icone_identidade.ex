@@ -9,11 +9,25 @@ defmodule IconeIdentidade do
     |> criar_cor
     |> criar_tabela
     |> remover_impar
+    |> constroi_pixel
   end
 
   def criar_cor(imagem) do
     %IconeIdentidade.Imagem{hex: [r, g, b | _tail]} = imagem
     %IconeIdentidade.Imagem{imagem | color: {r, g, b}}
+  end
+
+  def constroi_pixel(imagem) do
+    %IconeIdentidade.Imagem{grid: grid} = imagem
+    pixel_map = Enum.map grid, fn{ _valor, indice } ->
+      horizontal = rem(indice, 5) * 50
+      vertical = div(indice, 5) * 50
+      topo_esquerdo = { horizontal, vertical }
+      inferior_direita = { horizontal + 50, vertical + 50 }
+      { topo_esquerdo, inferior_direita }
+    end
+
+    %IconeIdentidade.Imagem{ imagem | pixel_map: pixel_map }
   end
 
   def criar_tabela(imagem) do
