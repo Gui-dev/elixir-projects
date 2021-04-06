@@ -1,9 +1,11 @@
 defmodule TodoAppWeb.TarefaController do
   use TodoAppWeb, :controller
+  alias TodoApp.Tarefa
 
-  def new(conn, _params) do
+  def new(conn, params) do
     IO.inspect conn
-    IO.puts '========'
-    IO.inspect _params
+    changeset = Tarefa.changeset(%Tarefa{})
+
+    render conn, "new.html", changeset: changeset
   end
 end
