@@ -8,7 +8,7 @@ defmodule ApipayWeb.Router do
   scope "/api", ApipayWeb do
     pipe_through :api
 
-    get "/", WelcomeController, :index
+    get "/:filename", WelcomeController, :index
   end
 
   # Enables LiveDashboard only for development
