@@ -49,7 +49,7 @@ defmodule Apipay.Accounts.Deposit do
     |> handle_cast(balance)
   end
 
-  defp handle_cast({:ok, value}, balance), do: Decimal.add(value, balance)
+  defp handle_cast({:ok, value}, balance), do: Decimal.add(balance, value)
   defp handle_cast(:error, _balance), do: {:error, "Invalid deposit value!"}
 
 
