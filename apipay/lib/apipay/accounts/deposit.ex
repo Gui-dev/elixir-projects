@@ -15,7 +15,7 @@ defmodule Apipay.Accounts.Deposit do
 
   defp get_account(repo, id) do
     case repo.get(Account, id) do
-      nil -> {:error, "Account, not found"}
+      nil -> {:error, "Account not found"}
       account -> {:ok, account}
     end
   end
