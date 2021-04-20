@@ -2,6 +2,7 @@ defmodule Apipay.Accounts.Transaction do
   alias Ecto.Multi
   alias Apipay.Accounts.Operation
   alias Apipay.Repo
+  alias Apipay.Accounts.Transactions.Response, as: TransactionResponse
 
   def call(%{"from" => from_id, "to" => to_id, "value" => value}) do
     withdraw_params = build_params(from_id, value)
@@ -19,7 +20,7 @@ defmodule Apipay.Accounts.Transaction do
     case Repo.transaction(multi) do
       {:error, _operation, reason, _changes} -> {:error, reason}
       {:ok, %{deposit: to_account, withdraw: from_account}} ->
-        {:ok, %{deposit: to_account, withdraw: from_account}}
+        {:ok, TransactionResponse.build(from_account, to_account)}
     end
   end
 end
