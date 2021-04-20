@@ -2,6 +2,7 @@ defmodule ApipayWeb.AccountsController do
   use ApipayWeb, :controller
 
   alias Apipay.Account
+  alias Apipay.Accounts.Transactions.Response, as: TransactionResponse
 
   action_fallback ApipayWeb.FallbackController
 
@@ -18,6 +19,14 @@ defmodule ApipayWeb.AccountsController do
       conn
       |> put_status(:ok)
       |> render("update.json", account: account)
+    end
+  end
+
+  def transaction(conn, params) do
+    with {:ok, %TransactionResponse{} = transaction} <- Apipay.transaction(params) do
+      conn
+      |> put_status(:ok)
+      |> render("transaction.json", transaction: transaction)
     end
   end
 end
