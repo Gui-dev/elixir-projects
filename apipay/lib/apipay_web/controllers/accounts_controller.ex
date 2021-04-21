@@ -23,6 +23,9 @@ defmodule ApipayWeb.AccountsController do
   end
 
   def transaction(conn, params) do
+    #task = Task.async(fn -> Apipay.transaction(params) end)
+    #result = Task.await(task)
+
     with {:ok, %TransactionResponse{} = transaction} <- Apipay.transaction(params) do
       conn
       |> put_status(:ok)
