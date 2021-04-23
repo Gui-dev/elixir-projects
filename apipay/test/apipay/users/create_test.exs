@@ -1,5 +1,5 @@
 defmodule Apipay.Users.CreateTest do
-  use Apipay.DataCase
+  use Apipay.DataCase, async: true
 
   alias Apipay.Repo
   alias Apipay.User

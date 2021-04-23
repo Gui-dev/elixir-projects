@@ -1,5 +1,5 @@
 defmodule ApipayWeb.UsersViewTest do
-  use ApipayWeb.ConnCase
+  use ApipayWeb.ConnCase, async: true
 
   import Phoenix.View
 

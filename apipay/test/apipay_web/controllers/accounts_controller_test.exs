@@ -1,5 +1,5 @@
 defmodule ApipayWeb.AccountsControllerTest do
-  use ApipayWeb.ConnCase
+  use ApipayWeb.ConnCase, async: true
 
   alias Apipay.{Account, User}
 
